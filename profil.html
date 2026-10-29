@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Puffé</title>
+    
+    <!-- Menghubungkan Google Fonts -->
+    <link href="https://googleapis.com" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            /* MENGUBAH BG: Dibuat transparan agar polkadot manis dari luar menembus masuk */
+            background: transparent !important;
+            padding: 40px 5%;
+            color: #4a5568;
+            line-height: 1.8;
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* MEMBUAT KOTAK PROFIL LEBIH POP-UP & MELAYANG */
+        .profile-container {
+            max-width: 750px;
+            margin: 20px auto;
+            /* Menggunakan warna putih solid agar tidak tembus polkadot di belakangnya */
+            background: #ffffff; 
+            /* Memberikan border halus berwarna pink soft agar batas kotak jelas */
+            border: 2px solid rgba(255, 117, 151, 0.15); 
+            border-radius: 24px;
+            padding: 40px;
+            /* MEMPERTEGAS BAYANGAN: Membuat efek pop-up melayang di atas background luar */
+            box-shadow: 0 15px 35px rgba(168, 68, 84, 0.12), 
+                        0 5px 15px rgba(0, 0, 0, 0.04);
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        h1 {
+            font-size: 28px;
+            font-weight: 700;
+            color: #A84454; /* Diubah ke warna Maroon agar senada dengan header utama */
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border-bottom: 2px dashed rgba(168, 68, 84, 0.2); /* Dashed disesuaikan ke warna maroon */
+            padding-bottom: 15px;
+        }
+
+        .subtitle {
+            font-size: 15px;
+            font-weight: 600;
+            color: #ff7597; /* Diubah ke warna Pink Buy agar serasi */
+            margin-bottom: 15px;
+        }
+
+        p {
+            font-size: 14.5px;
+            color: #4a5568;
+            margin-bottom: 15px;
+        }
+
+        /* Gaya Khusus untuk Kalimat Kutipan/Quote */
+        .highlight-box {
+            background: #fff8f9; /* Box background pink soft solid */
+            border-left: 4px solid #ff7597; /* Border disesuaikan warna pink buy */
+            padding: 15px 20px;
+            border-radius: 0 16px 16px 0;
+            margin: 25px 0;
+            font-style: italic;
+            color: #A84454; /* Teks quote diubah warna maroon agar lebih terbaca */
+            font-weight: 500;
+            border-top: 1px solid rgba(255, 117, 151, 0.08);
+            border-right: 1px solid rgba(255, 117, 151, 0.08);
+            border-bottom: 1px solid rgba(255, 117, 151, 0.08);
+        }
+
+        /* TEKS PENUTUP */
+        .closing-text {
+            text-align: center;
+            font-size: 16px;
+            font-weight: 700;
+            color: #ff7597; /* Diubah ke warna Pink Buy */
+            margin-top: 30px;
+            background: #fff8f9; /* Disesuaikan agar matching dengan highlight box */
+            padding: 12px;
+            border-radius: 50px;
+            display: inline-block;
+            width: 100%;
+            box-shadow: inset 0 2px 5px rgba(255, 117, 151, 0.03);
+            border: 1px solid rgba(255, 117, 151, 0.1);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="profile-container">
+        <!-- JUDUL UTAMA -->
+        <h1>🎀 About Puffé ☁️</h1>
+        
+        <div class="subtitle">Welcome to Puffé! 🧸💕</div>
+        
+        <p>Puffé adalah <em>little squishy shop</em> yang dibuat untuk menghadirkan benda-benda kecil yang bisa bikin harimu jadi lebih menyenangkan! ✨</p>
+        
+        <!-- KUTIPAN/HIGHLIGHT UTAMA -->
+        <div class="highlight-box">
+            "Kami percaya bahwa satu squish kecil bisa membawa satu senyum besar." 💞
+        </div>
+        
+        <p>Di Puffé, kamu bisa menemukan berbagai squishy lucu, lembut, dan tentunya bikin gemas! 🍓🔮</p>
+        <p>So, pick your favorite, give it a little squish, and...</p>
+        
+        <!-- TEKS PENUTUP -->
+        <div class="closing-text">
+            Squeeze, Smile, Repeat! 🎀
+        </div>
+    </div>
+
+</body>
+</html>

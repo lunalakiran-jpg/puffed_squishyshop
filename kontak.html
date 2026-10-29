@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hubungi Kami - Puffé</title>
+    
+    <!-- Menghubungkan Google Fonts -->
+    <link href="https://googleapis.com" rel="stylesheet">
+    
+    <style>
+        /* RESET & BASE STYLE */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            /* MENGUBAH BG: Dibuat transparan agar polkadot manis dari luar menembus masuk */
+            background: transparent !important;
+            padding: 40px 5%;
+            color: #4a5568;
+            line-height: 1.7;
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* CONTAINER UTAMA DENGAN EFEK POP-UP MELAYANG TEGAS */
+        .contact-container {
+            max-width: 900px;
+            margin: 20px auto;
+            /* Menggunakan warna putih solid agar tidak tembus polkadot di belakangnya */
+            background: #ffffff;
+            /* Memberikan border halus berwarna pink soft agar batas kotak jelas */
+            border: 2px solid rgba(255, 117, 151, 0.15);
+            border-radius: 24px;
+            padding: 40px;
+            /* MEMPERTEGAS BAYANGAN: Membuat efek pop-up melayang di atas background luar */
+            box-shadow: 0 15px 35px rgba(168, 68, 84, 0.12), 
+                        0 5px 15px rgba(0, 0, 0, 0.04);
+            animation: fadeInUp 0.8s ease-out;
+            
+            /* MEMBAGI MENJADI 2 KOLOM */
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 40px;
+        }
+
+        /* Saat layar hp (kecil), tata letak otomatis kembali jadi 1 kolom */
+        @media (max-width: 768px) {
+            .contact-container {
+                grid-template-columns: 1fr;
+                gap: 30px;
+                padding: 25px;
+            }
+        }
+
+        /* KOLOM KIRI: AREA INFORMASI KONTAK */
+        .info-section h1 {
+            font-size: 28px;
+            font-weight: 700;
+            color: #A84454; /* Diubah warna Maroon agar senada dengan header utama */
+            margin-bottom: 12px;
+        }
+
+        .info-section .intro-text {
+            font-size: 13.5px;
+            color: #64748b;
+            margin-bottom: 30px;
+        }
+
+        .contact-details {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        /* Merapikan detail item informasi kontak agar kontras melayang */
+        .detail-item {
+            background: #fff8f9; /* Box background pink soft solid */
+            padding: 15px;
+            border-radius: 16px;
+            border: 1px solid rgba(255, 117, 151, 0.08);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            box-shadow: inset 0 1px 3px rgba(255, 117, 151, 0.02);
+        }
+
+        .detail-item span {
+            font-size: 20px;
+        }
+
+        .detail-item p {
+            font-size: 13.5px;
+            color: #4a5568;
+        }
+
+        .detail-item strong {
+            display: block;
+            font-size: 11px;
+            color: #ff7597; /* Diubah warna Pink Buy agar serasi */
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* KOLOM KANAN: FORMULIR INPUT */
+        .form-section {
+            background: #ffffff;
+            border-radius: 20px;
+            padding: 30px;
+            border: 1px solid rgba(168, 68, 84, 0.08);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            font-size: 13px;
+            color: #4a5568;
+        }
+
+        /* Merapikan kolom input agar tidak bersudut tajam */
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 12px 16px;
+            border: 1px solid #edf2f7;
+            border-radius: 12px;
+            background-color: #f8fafc;
+            font-size: 13.5px;
+            color: #4a5568;
+            transition: all 0.3s ease;
+            outline: none;
+        }
+
+        /* Animasi bersinar saat kolom input diklik pengunjung */
+        .form-group input:focus, .form-group textarea:focus {
+            border-color: #ff7597; /* Bersinar warna Pink Buy */
+            background-color: #ffffff;
+            box-shadow: 0 0 0 3px rgba(255, 117, 151, 0.15);
+        }
+
+        .form-group textarea {
+            height: 120px;
+            resize: none; /* Mematikan resize manual agar layout tidak rusak */
+        }
+
+        /* TOMBOL KIRIM LEMBUT WARNA PINK BUY */
+        .btn-kirim {
+            background-color: #ff7597; /* Sesuai warna Pink Buy */
+            color: #ffffff;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 14px;
+            width: 100%;
+            box-shadow: 0 4px 12px rgba(255, 117, 151, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .btn-kirim:hover {
+            background-color: #A84454; /* Berubah Maroon saat didekati mouse */
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(168, 68, 84, 0.3);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="contact-container">
+        
+        <!-- KOLOM KIRI: INFO PEMILIK TOKO -->
+        <div class="info-section">
+            <h1>Hubungi Kami</h1> 
+            <p class="intro-text">Punya pertanyaan atau masukan? Silakan isi formulir di bawah ini untuk menghubungi tim kami.</p>
+            
+            <div class="contact-details">
+                <div class="detail-item">
+                    <span>📍</span>
+                    <div>
+                        <strong>Alamat</strong>
+                        <p>Jl. Mancaraya Indah</p>
+                    </div>
+                </div>
+                
+                <div class="detail-item">
+                    <span>📞</span>
+                    <div>
+                        <strong>Telepon</strong>
+                        <p>08123456789</p>
+                    </div>
+                </div>
+                
+                <div class="detail-item">
+                    <span>✉️</span>
+                    <div>
+                        <strong>Email</strong>
+                        <p>puffé00@gmail.com</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- KOLOM KANAN: FORMULIR -->
+        <div class="form-section">
+            <form action="#" method="POST">
+                <div class="form-group">
+                    <label for="nama">Nama Lengkap</label>
+                    <input type="text" id="nama" name="nama" placeholder="Masukkan nama Anda" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Alamat Email</label>
+                    <input type="email" id="email" name="email" placeholder="Masukkan email aktif" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="pesan">Pesan Anda</label>
+                    <textarea id="pesan" name="pesan" placeholder="Tuliskan pesan atau pertanyaan Anda di sini..." required></textarea>
+                </div>
+
+                <button type="submit" class="btn-kirim">Kirim Pesan ✨</button>
+            </form>
+        </div>
+
+    </div>
+
+</body>
+</html>

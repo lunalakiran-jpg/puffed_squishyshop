@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Products - Puffé</title>
+    
+    <link rel="preconnect" href="https://googleapis.com">
+    <link rel="preconnect" href="https://gstatic.com" crossorigin>
+    <link href="https://googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: #ffffff !important; 
+            background-image: none !important; 
+            padding: 20px 30px 40px 30px;
+            color: #4a5568;
+        }
+
+        @keyframes popIn {
+            0% { opacity: 0; transform: scale(0.95); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+
+        .header-top-produk {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            font-size: 24px;
+            font-weight: 700;
+            color: #ff7597;
+            letter-spacing: 0.5px;
+        }
+
+        /* Tombol Keranjang Mandiri di Halaman Produk */
+        .cart-btn-produk {
+            background: linear-gradient(90deg, #A84454 0%, #ff7597 100%);
+            border: none;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(255, 117, 151, 0.3);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .filter-group {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .btn-filter {
+            background-color: #fff0f3;
+            border: 1px solid rgba(255, 117, 151, 0.2);
+            color: #ff7597;
+            padding: 8px 18px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .btn-filter:hover, .btn-filter.active {
+            background-color: #ff7597;
+            color: #ffffff;
+            box-shadow: 0 4px 12px rgba(255, 117, 151, 0.3);
+            transform: translateY(-2px);
+        }
+        
+        .container {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        .card {
+            background: #ffffff;
+            border: 1px solid rgba(255, 117, 151, 0.15);
+            border-radius: 16px; 
+            padding: 15px;
+            width: 170px; 
+            text-align: center;
+            box-shadow: 0 8px 20px rgba(255, 117, 151, 0.05); 
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-8px); 
+            box-shadow: 0 12px 25px rgba(255, 117, 151, 0.12);
+            border-color: #ff7597;
+        }
+        
+        .card img {
+            width: 100%;
+            height: 120px;
+            object-fit: contain; 
+            border-radius: 12px;
+            background-color: #ffffff; 
+            padding: 8px;
+            border: 2px solid #fff0f3; 
+        }
+
+        h4 {
+            font-size: 14px;
+            font-weight: 600;
+            color: #2d3748;
+            margin-top: 12px;
+            height: 40px; 
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .harga {
+            color: #4a69bd; 
+            font-size: 14px;
+            font-weight: 700;
+            margin: 6px 0 12px 0;
+        }
+        
+        .btn-beli {
+            background-color: #ff7597; 
+            color: #ffffff; 
+            font-size: 13px;
+            font-weight: 600;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 20px; 
+            cursor: pointer;
+            width: 100%;
+            box-shadow: 0 4px 10px rgba(255, 117, 151, 0.25);
+            transition: all 0.2s ease;
+        }
+        
+        .btn-beli:hover {
+            background-color: #A84454; 
+            transform: scale(1.03);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header-top-produk">
+        <h2>FIND YOUR FAVORITE ♡!</h2>
+              <button class="cart-btn-produk" onclick="bukaCheckout()">
+            <i class="fa-solid fa-cart-shopping"></i> Cart <span id="cartBadgeProd" style="background:#ff3366; color:white; padding:2px 6px; border-radius:50%; font-size:11px;">0</span>
+        </button>
+    </div>
+
+    <div class="filter-group">
+        <button class="btn-filter active" data-target="all" id="btn-all"><i class="fa-solid fa-border-all"></i> All Products</button>
+        <button class="btn-filter" data-target="food" id="btn-food"><i class="fa-solid fa-cake-candles"></i> Foodie Squishy</button>
+        <button class="btn-filter" data-target="animal" id="btn-animal"><i class="fa-solid fa-paw"></i> Animal Squishy</button>
+        <button class="btn-filter" data-target="limited" id="btn-limited"><i class="fa-solid fa-star"></i> Limited Edition</button>
+    </div>
+    
+    <div class="container">
+        <div class="card" data-category="food limited">
+            <img src="hk.jpg" alt="Hello Kitty Mint">
+            <h4>Hello Kitty Mint</h4>
+            <p class="harga">Rp 250.000</p>
+            <button class="btn-beli" onclick="tambahKeKeranjang('Hello Kitty Mint', 250000)">Buy ♡</button>
+        </div>
+        <div class="card" data-category="animal">
+            <img src="sheep.jpg" alt="Pink Sheep">
+            <h4>Pink Sheep</h4>
+            <p class="harga">Rp 190.000</p>
+            <button class="btn-beli" onclick="tambahKeKeranjang('Pink Sheep', 190000)">Buy ♡</button>
+        </div>
+        <div class="card" data-category="food">
+            <img src="pancake hl.jpg" alt="Pancake Hello Kitty">
+            <h4>Pancake Hello Kitty</h4>
+            <p class="harga">Rp 230.000</p>
+            <button class="btn-beli" onclick="tambahKeKeranjang('Pancake Hello Kitty', 230000)">Buy ♡</button>
+        </div>
+        <div class="card" data-category="food">
+            <img src="roll.jpg" alt="Rilakuma Cake Roll">
+            <h4>Rilakuma Cake Roll</h4>
+            <p class="harga">Rp 182.000</p>
+            <button class="btn-beli" onclick="tambahKeKeranjang('Rilakuma Cake Roll', 182000)">Buy ♡</button>
+        </div>
+        <div class="card" data-category="limited">
+            <img src="sc.jpg" alt="Mini Strawberry Cake">
+            <h4>Mini Strawberry Cake</h4>
+            <p class="harga">Rp 270.000</p>
+            <button class="btn-beli" onclick="tambahKeKeranjang('Mini Strawberry Cake', 270000)">Buy ♡</button>
+        </div>
+        <div class="card" data-category="food">
+            <img src="burger.jpg" alt="Burger">
+            <h4>Burger</h4>
+            <p class="harga">Rp 180.000</p>
+            <button class="btn-beli" onclick="tambahKeKeranjang('Burger', 180000)">Buy ♡</button>
+        </div>
+        <div class="card" data-category="food">
+            <img src="apel.jpg" alt="Apel">
+            <h4>Apel</h4>
+            <p class="harga">Rp 110.000</p>
+            <button class="btn-beli" onclick="tambahKeKeranjang('Apel', 110000)">Buy ♡</button>
+        </div>
+        <div class="card" data-category="food">
+            <img src="donat sp.jpg" alt="Donnut Sprinkle">
+            <h4>Donnut Sprinkle</h4>
+            <p class="harga">Rp 135.000</p>
+            <button class="btn-beli" onclick="tambahKeKeranjang('Donnut Sprinkle', 135000)">Buy ♡</button>
+        </div>
+        <div class="card" data-category="limited">
+            <img src="peach.jpg" alt="Peach">
+            <h4>Peach</h4>
+            <p class="harga">Rp 233.000</p>
+            <button class="btn-beli" onclick="tambahKeKeranjang('Peach', 233000)">Buy ♡</button>
+        </div>
+        <div class="card" data-category="food">
+            <img src="cereal.jpg" alt="Loops Cereal">
+            <h4>Loops Cereal</h4>
+            <p class="harga">Rp 215.000</p>
+            <button class="btn-beli" onclick="tambahKeKeranjang('Loops Cereal', 215000)">Buy ♡</button>
+        </div>
+        <div class="card" data-category="food">
+            <img src="ice cream.jpg" alt="Ice Cream">
+            <h4>Ice Cream</h4>
+            <p class="harga">Rp 177.000</p>
+            <button class="btn-beli" onclick="tambahKeKeranjang('Ice Cream', 177000)">Buy ♡</button>
+        </div>
+        <div class="card" data-category="food">
+            <img src="cookies.jpg" alt="Cookies">
+            <h4>Cookies</h4>
+            <p class="harga">Rp 200.000</p>
+            <button class="btn-beli" onclick="tambahKeKeranjang('Cookies', 200000)">Buy ♡</button>
+        </div>
+        <div class="card" data-category="food">
+            <img src="cheese.jpg" alt="Cheese">
+            <h4>Cheese</h4>
+            <p class="harga">Rp 128.000</p>
+            <button class="btn-beli" onclick="tambahKeKeranjang('Cheese', 128000)">Buy ♡</button>
+        </div>
+        <div class="card" data-category="limited">
+            <img src="sg.jpg" alt="Strawberry Galaxy">
+            <h4>Strawberry Galaxy</h4>
+            <p class="harga">Rp 210.000</p>
+            <button class="btn-beli" onclick="tambahKeKeranjang('Strawberry Galaxy', 210000)">Buy ♡</button>
+        </div>
+        <div class="card" data-category="food">
+            <img src="nanas.jpg" alt="Pink Pineapple">
+            <h4>Pink Pineapple</h4>
+            <p class="harga">Rp 190.000</p>
+            <button class="btn-beli" onclick="tambahKeKeranjang('Pink Pineapple', 190000)">Buy ♡</button>
+        </div>
+    </div>
+
+        <div id="checkoutModalProd" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 9999; justify-content: center; align-items: center;">
+        <div style="background: #ffffff; padding: 30px; border-radius: 20px; width: 350px; text-align: center; box-shadow: 0 10px 25px rgba(0,0,0,0.2); border: 3px solid #ff7597;">
+            <h3 style="color: #ff7597; margin-bottom: 15px;">🛍️ Puffé Checkout</h3>
+            <p style="font-size: 14px; color: #4a5568; margin-bottom: 10px;">Total Belanjaan:</p>
+            <p id="modalTotalHargaProd" style="font-size: 18px; font-weight: 700; color: #2d3748; margin-bottom: 15px;">Rp 0</p>
+            
+            <!-- CATATAN TUGAS SEKOLAH (Cukup diselipin di sini aja satu buah!) -->
+            <div style="background-color: #fff0f3; padding: 8px; border-radius: 8px; font-size: 11px; color: #A84454; margin-bottom: 15px; border: 1px dashed #ffccd5;">
+                📌 <strong>Catatan:</strong> Ini hanya simulasi tugas sekolah. Pembayaran dan pesanan tidak diproses secara nyata!
+            </div>
+
+            <div style="text-align: left; margin-bottom: 20px; font-size: 13px; color: #4a5568;">
+                <label style="font-weight: 600;">Metode Pembayaran:</label><br>
+                <select id="metodeBayarProd" style="width: 100%; padding: 8px; margin-top: 5px; border-radius: 10px; border: 1px solid #ffccd5;">
+                    <option value="QRIS">QRIS (Simulasi)</option>
+                    <option value="BCA">Transfer Bank BCA (Simulasi)</option>
+                    <option value="COD">COD (Bayar di Tempat)</option>
+                </select>
+            </div>
+
+            <button onclick="prosesBayar()" style="background-color: #ff7597; color: white; border: none; padding: 10px 20px; border-radius: 20px; font-weight: 600; cursor: pointer; width: 100%; margin-bottom: 10px;">Bayar Sekarang ♡</button>
+            <button onclick="tutupModal()" style="background: none; border: none; color: #a0aec0; font-size: 12px; cursor: pointer;">Batal</button>
+        </div>
+    </div><!-- ================= SECTION DAFTAR PUSTAKA & CREDIT ================= -->
+<section style="margin-top: 50px; padding: 25px; background: #fff0f3; border-radius: 16px; border: 2px dashed #ffccd5; font-family: 'Poppins', sans-serif;">
+    <h3 style="color: #ff7597; font-size: 16px; margin-bottom: 12px; display: flex; align-items: center; gap: 8px;">
+        <i class="fa-solid fa-book-bookmark"></i> Sumber Referensi & Gambar Produk
+    </h3>
+    <p style="font-size: 12px; color: #666; margin-bottom: 15px;">
+        Aset visual gambar squishy pada website ini diperoleh dari referensi platform Pinterest berikut:
+    </p>
+    
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 10px; font-size: 12px; color: #4a5568;">
+        <div>• <strong>Hello Kitty Mint:</strong> <a href="https://pin.it/2IYGZ8yTw" target="_blank" style="color: #A84454;">Pinterest Link</a></div>
+        <div>• <strong>Strawberry Galaxy:</strong> <a href="https://pin.it/6TSzlPQgT" target="_blank" style="color: #A84454;">Pinterest Link</a></div>
+        <div>• <strong>Mini Strawberry Cake:</strong> <a href="https://pin.it/7GPQwVts7" target="_blank" style="color: #A84454;">Pinterest Link</a></div>
+        <div>• <strong>Burger:</strong> <a href="https://pin.it/5Avnvb36R" target="_blank" style="color: #A84454;">Pinterest Link</a></div>
+        <div>• <strong>Apel:</strong> <a href="https://pin.it/4FEBK9ghK" target="_blank" style="color: #A84454;">Pinterest Link</a></div>
+        <div>• <strong>Donat Sprinkle:</strong> <a href="https://pin.it/3GtUEA8eT" target="_blank" style="color: #A84454;">Pinterest Link</a></div>
+        <div>• <strong>Pink Sheep:</strong> <a href="https://pin.it/6fzvhoiZC" target="_blank" style="color: #A84454;">Pinterest Link</a></div>
+        <div>• <strong>Peach:</strong> <a href="https://pin.it/28z59jgP9" target="_blank" style="color: #A84454;">Pinterest Link</a></div>
+        <div>• <strong>Cookies:</strong> <a href="https://pin.it/6CpWlEXkt" target="_blank" style="color: #A84454;">Pinterest Link</a></div>
+        <div>• <strong>Loops Cereal:</strong> <a href="https://pin.it/6EagxmjOP" target="_blank" style="color: #A84454;">Pinterest Link</a></div>
+        <div>• <strong>Ice Cream:</strong> <a href="https://pin.it/3V0myYYhR" target="_blank" style="color: #A84454;">Pinterest Link</a></div>
+        <div>• <strong>Cheese:</strong> <a href="https://pin.it/7dWDQm0ae" target="_blank" style="color: #A84454;">Pinterest Link</a></div>
+        <div>• <strong>Pink Pineapple:</strong> <a href="https://pin.it/5f8OLYcEi" target="_blank" style="color: #A84454;">Pinterest Link</a></div>
+        <div>• <strong>Rilakuma Cake Roll:</strong> <a href="https://pin.it/4aKdogl3l" target="_blank" style="color: #A84454;">Pinterest Link</a></div>
+        <div>• <strong>Pancake Hello Kitty:</strong> <a href="https://pin.it/48M8eqhCd" target="_blank" style="color: #A84454;">Pinterest Link</a></div>
+    </div>
+
+    <hr style="border: none; border-top: 1px solid #ffccd5; margin: 20px 0;">
+
+    <p style="text-align: center; font-size: 12px; color: #A84454; font-weight: 500;">
+        &copy; 2026 <strong>Puffé</strong> — Created by <strong>ℒ˚˖𓍢ִ໋❀</strong>
+    </p>
+</section>
+<!-- ==================================================================== -->
+    <script>
+        let cartCount = 0;
+        let totalHarga = 0;
+
+        function tambahKeKeranjang(nama, harga) {
+            cartCount++;
+            totalHarga += harga;
+            document.getElementById('cartBadgeProd').innerText = cartCount;
+            alert(nama + " berhasil masuk keranjang!");
+        }
+
+        function bukaCheckout() {
+            if (cartCount === 0) {
+                alert("Keranjang masih kosong. Silakan pilih produk terlebih dahulu.");
+                return;
+            }
+            document.getElementById('modalTotalHargaProd').innerText = "Rp " + totalHarga.toLocaleString('id-ID');
+            document.getElementById('checkoutModalProd').style.display = 'flex';
+        }
+
+        function tutupModal() {
+            document.getElementById('checkoutModalProd').style.display = 'none';
+        }
+
+        function prosesBayar() {
+            let metode = document.getElementById('metodeBayarProd').value;
+            alert("🎉 Pembayaran simulasi via " + metode + " berhasil!\nTerima kasih sudah berbelanja di Puffé. Pesanan siap dikirim 📦💕");
+            cartCount = 0;
+            totalHarga = 0;
+            document.getElementById('cartBadgeProd').innerText = "0";
+            tutupModal();
+        }
+
+               document.addEventListener("DOMContentLoaded", function () {
+            const filterButtons = document.querySelectorAll('.btn-filter');
+            const cards = document.querySelectorAll('.card');
+
+            function jalankanFilter(targetCategory) {
+                filterButtons.forEach(btn => {
+                    if (btn.getAttribute('data-target') === targetCategory) {
+                        btn.classList.add('active');
+                    } else {
+                        btn.classList.remove('active');
+                    }
+                });
+
+                cards.forEach(card => {
+                    const cardCategory = card.getAttribute('data-category');
+                    if (targetCategory === 'all' || cardCategory.includes(targetCategory)) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            }
+
+            const urlParams = new URLSearchParams(window.location.search);
+            const categoryDariUrl = urlParams.get('category');
+            if (categoryDariUrl) {
+                jalankanFilter(categoryDariUrl);
+            }
+
+            filterButtons.forEach(button => {
+                button.addEventListener('click', function () {
+                    const targetCategory = this.getAttribute('data-target');
+                    jalankanFilter(targetCategory);
+                });
+            });
+        });
+    </script>
+</body>
+</html>

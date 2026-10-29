@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home - Puffé</title>
+    
+    <!-- Memanggil Google Fonts Poppins dengan Benar -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://gstatic.com" crossorigin>
+    <link href="https://googleapis.com" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: transparent !important;
+            padding: 40px 5%;
+            color: #4a5568;
+            line-height: 1.6;
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-6px); }
+            100% { transform: translateY(0px); }
+        }
+
+        @keyframes slideInUp {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes jiggle {
+            0% { transform: translateY(-3px) rotate(0deg); }
+            25% { transform: translateY(-3px) rotate(-3deg); }
+            50% { transform: translateY(-3px) rotate(3deg); }
+            75% { transform: translateY(-3px) rotate(-1.5deg); }
+            100% { transform: translateY(-3px) rotate(0deg); }
+        }
+
+        @keyframes expandWidth {
+            from { width: 0%; }
+            to { width: 100%; }
+        }
+
+        /* MEMBUAT KOTAK INFO LEBIH POP-UP & MELAYANG */
+        .welcome-container {
+            max-width: 800px;
+            margin: 20px auto;
+            background: #ffffff; 
+            border: 2px solid rgba(255, 117, 151, 0.15); 
+            border-radius: 24px;
+            padding: 40px;
+            box-shadow: 0 15px 35px rgba(168, 68, 84, 0.12), 
+                        0 5px 15px rgba(0, 0, 0, 0.04);
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        h1 {
+            font-size: 28px;
+            font-weight: 700;
+            color: #A84454; 
+            margin-bottom: 8px;
+        }
+
+        /* Kelas Khusus untuk Animasi Ikon Mengambang */
+        .floating-icon {
+            display: inline-block;
+            animation: float 3s ease-in-out infinite;
+        }
+        .delay-icon {
+            animation-delay: 1.5s;
+        }
+
+        h3 {
+            font-size: 16px;
+            font-weight: 500;
+            color: #ff7597; 
+            margin-bottom: 25px;
+        }
+
+        p {
+            font-size: 14px;
+            color: #64748b;
+            margin-bottom: 15px;
+        }
+
+        .cta-group {
+            display: flex;
+            gap: 15px;
+            margin: 25px 0 35px 0;
+            flex-wrap: wrap;
+        }
+
+        .btn-cta {
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 24px;
+            border-radius: 30px;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+        }
+
+        .btn-pink {
+            background-color: #ff7597; 
+            color: #ffffff;
+            box-shadow: 0 4px 12px rgba(255, 117, 151, 0.3);
+        }
+
+        .btn-pink:hover {
+            background-color: #A84454; 
+            box-shadow: 0 6px 18px rgba(168, 68, 84, 0.3);
+            animation: jiggle 0.4s ease-in-out forwards;
+        }
+
+        .btn-yellow {
+            background-color: #ffd43b;
+            color: #5c4300;
+            box-shadow: 0 4px 12px rgba(255, 212, 95, 0.2);
+        }
+
+        .btn-yellow:hover {
+            background-color: #fcc419;
+            box-shadow: 0 6px 18px rgba(252, 196, 25, 0.3);
+            animation: jiggle 0.4s ease-in-out forwards;
+        }
+
+        /* Pembatas Halaman dengan Animasi Memanjang */
+        hr {
+            border: none;
+            height: 2px;
+            background: linear-gradient(to right, rgba(255, 117, 151, 0.2), transparent);
+            margin: 30px 0;
+            animation: expandWidth 1.2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        }
+
+        .section-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #2d3748;
+            margin-bottom: 15px;
+        }
+
+        .feature-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        /* 1. Animasi Dasar Muncul Memantul dari Bawah */
+@keyframes popInBounce {
+    0% { opacity: 0; transform: translateY(20px) scale(0.95); }
+    70% { transform: translateY(-3px) scale(1.02); }
+    100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* 2. Animasi Emoji Goyang saat Disorot */
+@keyframes emojiWiggle {
+    0% { transform: rotate(0deg); }
+    25% { transform: rotate(-8deg) scale(1.2); }
+    75% { transform: rotate(8deg) scale(1.2); }
+    100% { transform: rotate(0deg) scale(1.1); }
+}
+
+/* Update Style pada Feature List Item */
+.feature-item {
+    background: #fff8f9; 
+    padding: 12px 20px;
+    border-radius: 12px;
+    font-size: 13.5px;
+    border: 1px solid rgba(255, 117, 151, 0.08);
+    
+    /* Menerapkan animasi muncul memantul */
+    opacity: 0;
+    animation: popInBounce 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+    transition: all 0.3s ease; /* Transisi halus untuk efek hover */
+}
+
+/* Mengatur Jeda Kemunculan Bergantian */
+.feature-item:nth-child(1) { animation-delay: 0.1s; }
+.feature-item:nth-child(2) { animation-delay: 0.25s; }
+.feature-item:nth-child(3) { animation-delay: 0.4s; }
+.feature-item:nth-child(4) { animation-delay: 0.55s; }
+
+/* 3. Efek Hover ketika Baris Disorot Mouse */
+.feature-item:hover {
+    background-color: #ffffff; /* Berubah jadi putih bersih */
+    border-color: #ff7597; /* Garis tepi mengental warna pink tema */
+    transform: translateY(-4px); /* Terangkat ke atas */
+    box-shadow: 0 8px 20px rgba(255, 117, 151, 0.12); /* Bayangan lembut di bawahnya */
+    color: #A84454; /* Teks berubah menjadi warna maroon manis */
+}
+
+/* Membuat emoji di dalam list ikut bergoyang saat barisnya di-hover */
+.feature-item:hover strong::before, 
+.feature-item:hover span {
+    display: inline-block;
+    animation: emojiWiggle 0.4s ease-in-out;
+}
+
+    </style>
+</head>
+<body>
+
+    <div class="welcome-container">
+        <h1><span class="floating-icon">☁️</span> Welcome to Puffé! <span class="floating-icon delay-icon">🎀</span></h1>
+        <h3>Squeeze, Smile, Repeat! 💗</h3>
+     
+        <p>Temukan squishy super gemas yang siap nemenin hari-harimu! Mulai dari yang tiny, soft, squishy, sampai extra adorable 🧸✨</p>
+        <p>💌 Pick your favorite squish & let the happiness begin!</p>
+
+        <div class="cta-group">
+            <a href="products.html" class="btn-cta btn-pink">🛍️ SHOP NOW</a>
+            <a href="products.html" class="btn-cta btn-yellow">🎀 EXPLORE SQUISHIES</a>
+        </div>
+
+        <hr>
+
+        <div class="section-title">🍓 What's New?</div>
+        <p><strong>New squishies just landed!</strong></p>
+        <p>Hati-hati… sekali lihat bisa langsung pengen checkout 👀💕</p>
+
+        <hr>
+        
+        <div class="section-title">☁️ Why Puffé?</div>
+        <div class="feature-list">
+            <div class="feature-item">🫧 <strong>Super Squishy</strong> — lembut dan satisfying!</div>
+            <div class="feature-item">🎀 <strong>Extra Cute</strong> — gemesnya nggak kira-kira</div>
+            <div class="feature-item">💌 <strong>Packed With Love</strong> — setiap pesanan dikemas dengan penuh perhatian</div>
+            <div class="feature-item">🌷 <strong>Made For Happy Days</strong> — karena hal kecil juga bisa bikin senyum!</div>
+        </div>
+
+        <hr>
+
+        <div class="section-title">🧸 Find Your Perfect Squish!</div>
+        <p><em>Too cute to resist, too squishy to let go. 💗</em></p>
+        <p>Pilih squishy favoritmu, peluk, pencet, dan nikmati little happy moment bersama Puffé! ☁️🎀</p>
+    </div>
+
+</body>
+</html>

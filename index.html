@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>.:: Puffé - Halaman Utama ::.</title>
+    
+    <link rel="preconnect" href="https://googleapis.com">
+    <link rel="preconnect" href="https://gstatic.com" crossorigin>
+    <link href="https://googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        @keyframes moveBackground {
+            0% { background-position: 0 0, 25px 25px; }
+            100% { background-position: 50px 50px, 75px 75px; }
+        }
+
+        body {
+            background-color: #ffffff;
+            background-image: radial-gradient(#ffccd5 14%, transparent 14%),
+                              radial-gradient(#ffccd5 14%, transparent 14%);
+            background-size: 50px 50px;
+            background-position: 0 0, 25px 25px;
+            animation: moveBackground 8s linear infinite; 
+            color: #2d3748;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .main-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 8%;
+            background: linear-gradient(90deg, #A84454 0%, #ff7597 100%);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        .logo-area h1 {
+            font-size: 26px;
+            font-weight: 700;
+            color: #ffffff;
+            letter-spacing: 0.5px;
+        }
+
+        .logo-area p {
+            font-size: 11px;
+            color: #fcdede;
+            margin-top: 2px;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 25px;
+        }
+
+        .main-nav {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            color: rgba(255, 255, 255, 0.85);
+            padding: 8px 18px;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            color: #A84454;
+            background-color: #ffffff;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            top: 110%;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            min-width: 180px;
+            border-radius: 16px;
+            box-shadow: 0 10px 25px rgba(168, 68, 84, 0.15);
+            padding: 8px 0;
+            z-index: 1000;
+            border: 2px solid #ffccd5;
+            animation: fadeInUp 0.3s ease-out;
+        }
+
+        .dropdown-menu::before {
+            content: '';
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            border-width: 7px;
+            border-style: solid;
+            border-color: transparent transparent #ffccd5 transparent;
+        }
+
+        .dropdown-item {
+            color: #4a5568;
+            padding: 10px 20px;
+            text-decoration: none;
+            display: block;
+            font-size: 13px;
+            font-weight: 500;
+            transition: all 0.2s ease;
+            text-align: left;
+            cursor: pointer;
+        }
+
+        .dropdown-item i {
+            margin-right: 8px;
+            color: #ff7597;
+            font-size: 12px;
+        }
+
+        .dropdown-item:hover {
+            background-color: #fcdede;
+            color: #A84454;
+            padding-left: 24px; 
+        }
+
+        .dropdown:hover .dropdown-menu {
+            display: block;
+        }
+
+        .content-wrapper {
+            flex: 1;
+            padding: 35px 8%;
+            animation: fadeInUp 0.6s ease-out;
+            background: transparent;         
+        }
+
+        .content-header h2 {
+            font-size: 18px;
+            font-weight: 700;
+            color: #ff7597; 
+            background: #ffffff;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 20px;
+            border-radius: 30px; 
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
+            border: 1px solid rgba(255, 117, 151, 0.2);
+            margin-bottom: 25px;
+        }
+
+        .iframe-container {
+            width: 100%;
+            height: 600px;
+            background: rgba(255, 255, 255, 0.9); 
+            border-radius: 24px; 
+            overflow: hidden;
+            box-shadow: 0 20px 45px rgba(0, 0, 0, 0.06);             
+            border: 6px solid #ffffff;         
+        }
+
+        .iframe-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            background: transparent;
+        }
+
+        .main-footer {
+            background: rgba(255, 255, 255, 0.88);
+            backdrop-filter: blur(10px);
+            text-align: center;
+            padding: 18px;
+            font-size: 12px;
+            color: #a0aec0;
+            border-top: 2px solid #ff7597; 
+        }
+    </style>
+</head>
+<body>
+<!-- BANNER PERINGATAN TUGAS AKHIR -->
+    <div style="background-color: #fff0f3; color: #A84454; text-align: center; padding: 10px 20px; font-size: 12px; font-weight: 500; border-bottom: 1px dashed #ffccd5;">
+        ⋆.˚ <em>Notice: Website ini dibuat hanya untuk keperluan tugas sekolah. Simulasi belanja saja ya, tidak ada transaksi jual-beli asli!</em> ♡
+    </div>
+
+    <header class="main-header">
+        <div class="logo-area">
+            <h1>Puffé</h1>
+            <p>A Little Squish, A Lot of Joy 𓇼 ⋆.˚ 𓆡⋆.˚ 𓇼</p>
+        </div>
+
+        <div class="header-right">
+            <nav class="main-nav">
+                <a href="home.html" target="konten" class="nav-link">Home</a>
+                <a href="profil.html" target="konten" class="nav-link">Profile</a>
+                
+                <div class="dropdown">
+                    <a href="products.html?category=all" target="konten" class="nav-link" id="productBtn">Products</a>
+                    <div class="dropdown-menu">
+                        <a href="products.html?category=all" target="konten" class="dropdown-item"><i class="fa-solid fa-border-all"></i> All Products</a>
+                        <a href="products.html?category=food" target="konten" class="dropdown-item"><i class="fa-solid fa-cake-candles"></i> Foodie Squishy</a>
+                        <a href="products.html?category=animal" target="konten" class="dropdown-item"><i class="fa-solid fa-paw"></i> Animal Squishy</a>
+                        <a href="products.html?category=limited" target="konten" class="dropdown-item"><i class="fa-solid fa-star"></i> Limited Edition</a>
+                    </div>
+                </div>
+
+                <a href="service.html" target="konten" class="nav-link">Service</a>
+                <a href="kontak.html" target="konten" class="nav-link">Contact</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="content-wrapper">
+        <div class="content-header">
+            <h2 id="judulKonten">✨ Explore Puffé World ☁️</h2>
+        </div>
+        
+        <div class="iframe-container">
+            <iframe id="iframeKonten" src="home.html" name="konten" title="Area Konten Website"></iframe>
+        </div>
+    </main>
+
+    <footer class="main-footer">
+        <p>&copy; 2026 Toko Online Puffé. All Rights Reserved.</p>
+    </footer>
+
+</body>
+</html>
